@@ -1,0 +1,307 @@
+[
+  {
+    "name": "Black & White Minimalist",
+    "category": "minimalist",
+    "thumbnail": "/templates/Black and White Minimalist Accountant Resume.png",
+    "structure": {
+      "layout": "single-column",
+      "colors": {
+        "primary": "#2563eb",
+        "secondary": "#64748b",
+        "text": "#1e293b",
+        "background": "#ffffff"
+      },
+      "fonts": {
+        "heading": "Inter",
+        "body": "Inter"
+      },
+      "sections": [
+        { "type": "header", "order": 1, "visible": true },
+        { "type": "summary", "order": 2, "visible": true },
+        { "type": "experience", "order": 3, "visible": true },
+        { "type": "education", "order": 4, "visible": true },
+        { "type": "skills", "order": 5, "visible": true }
+      ]
+    },
+    "htmlTemplate": "<div class='resume-container'><div class='header'><h1>{{fullName}}</h1><p>{{email}} | {{phone}} | {{location}}</p></div><div class='summary'><h2>Professional Summary</h2><p>{{summary}}</p></div><div class='experience'><h2>Experience</h2>{{#each experience}}<div class='job'><h3>{{title}}</h3><p class='company'>{{company}} | {{duration}}</p><p>{{description}}</p></div>{{/each}}</div><div class='education'><h2>Education</h2>{{#each education}}<div class='degree'><h3>{{degree}}</h3><p>{{school}} | {{year}}</p></div>{{/each}}</div><div class='skills'><h2>Skills</h2><p>{{skills}}</p></div></div>",
+    "cssTemplate": ".resume-container { font-family: Inter, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; } .header { text-align: center; margin-bottom: 30px; border-bottom: 3px solid #2563eb; padding-bottom: 20px; } .header h1 { font-size: 36px; color: #1e293b; margin: 0; } .header p { color: #64748b; margin-top: 10px; } h2 { color: #2563eb; font-size: 20px; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px; } .job, .degree { margin-bottom: 20px; } h3 { font-size: 18px; color: #1e293b; margin: 0; } .company { color: #64748b; font-style: italic; margin: 5px 0; }",
+    "isActive": true
+  },
+  {
+    "name": "Business School Graduate",
+    "category": "professional",
+    "thumbnail": "/templates/Black and White Simple Business School Graduate Corporate Resume.png",
+    "structure": {
+      "layout": "two-column",
+      "colors": {
+        "primary": "#0f172a",
+        "secondary": "#94a3b8",
+        "text": "#334155",
+        "background": "#ffffff"
+      },
+      "fonts": {
+        "heading": "Poppins",
+        "body": "Roboto"
+      },
+      "sections": [
+        { "type": "header", "order": 1, "visible": true },
+        { "type": "summary", "order": 2, "visible": true },
+        { "type": "experience", "order": 3, "visible": true },
+        { "type": "skills", "order": 4, "visible": true },
+        { "type": "education", "order": 5, "visible": true }
+      ]
+    },
+    "htmlTemplate": "<div class='resume-container'><div class='sidebar'><div class='header'><h1>{{fullName}}</h1><p>{{email}}<br>{{phone}}<br>{{location}}</p></div><div class='skills'><h2>Skills</h2><p>{{skills}}</p></div><div class='education'><h2>Education</h2>{{#each education}}<div class='degree'><h3>{{degree}}</h3><p>{{school}}<br>{{year}}</p></div>{{/each}}</div></div><div class='main'><div class='summary'><h2>About Me</h2><p>{{summary}}</p></div><div class='experience'><h2>Experience</h2>{{#each experience}}<div class='job'><h3>{{title}}</h3><p class='company'>{{company}} | {{duration}}</p><p>{{description}}</p></div>{{/each}}</div></div></div>",
+    "cssTemplate": ".resume-container { display: grid; grid-template-columns: 300px 1fr; font-family: Roboto, sans-serif; max-width: 1000px; margin: 0 auto; } .sidebar { background: #f8fafc; padding: 40px 30px; } .main { padding: 40px; } .header h1 { font-family: Poppins, sans-serif; font-size: 28px; color: #0f172a; margin: 0 0 20px 0; } .header p { color: #64748b; line-height: 1.8; } h2 { font-family: Poppins, sans-serif; color: #0f172a; font-size: 18px; margin-top: 30px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; } h3 { font-size: 16px; color: #334155; margin: 0; } .company { color: #94a3b8; margin: 5px 0 10px 0; }",
+    "isActive": true
+  },
+  {
+    "name": "Black Modern Professional",
+    "category": "modern",
+    "thumbnail": "/templates/Black Modern Professional Resume.png",
+    "structure": {
+      "layout": "single-column",
+      "colors": {
+        "primary": "#dc2626",
+        "secondary": "#f97316",
+        "text": "#1f2937",
+        "background": "#ffffff"
+      },
+      "fonts": {
+        "heading": "Montserrat",
+        "body": "Open Sans"
+      },
+      "sections": [
+        { "type": "header", "order": 1, "visible": true },
+        { "type": "summary", "order": 2, "visible": true },
+        { "type": "experience", "order": 3, "visible": true },
+        { "type": "projects", "order": 4, "visible": true },
+        { "type": "education", "order": 5, "visible": true },
+        { "type": "skills", "order": 6, "visible": true }
+      ]
+    },
+    "htmlTemplate": "<div class='resume-container'><div class='header'><h1>{{fullName}}</h1><p class='contact'>{{email}} • {{phone}} • {{location}}</p></div><div class='summary'><h2>Profile</h2><p>{{summary}}</p></div><div class='experience'><h2>Experience</h2>{{#each experience}}<div class='job'><div class='job-header'><h3>{{title}}</h3><span class='duration'>{{duration}}</span></div><p class='company'>{{company}}</p><p>{{description}}</p></div>{{/each}}</div><div class='education'><h2>Education</h2>{{#each education}}<div class='degree'><h3>{{degree}}</h3><p>{{school}} • {{year}}</p></div>{{/each}}</div><div class='skills'><h2>Skills</h2><p>{{skills}}</p></div></div>",
+    "cssTemplate": ".resume-container { font-family: 'Open Sans', sans-serif; max-width: 800px; margin: 0 auto; padding: 50px; } .header { background: linear-gradient(135deg, #dc2626 0%, #f97316 100%); color: white; padding: 40px; margin: -50px -50px 40px -50px; text-align: center; } .header h1 { font-family: Montserrat, sans-serif; font-size: 42px; margin: 0; font-weight: 700; } .contact { margin-top: 15px; font-size: 14px; } h2 { font-family: Montserrat, sans-serif; color: #dc2626; font-size: 22px; margin-top: 35px; margin-bottom: 20px; font-weight: 700; } .job-header { display: flex; justify-content: space-between; align-items: baseline; } h3 { font-family: Montserrat, sans-serif; font-size: 18px; color: #1f2937; margin: 0; font-weight: 600; } .company { color: #6b7280; margin: 5px 0 10px 0; font-weight: 500; } .duration { color: #f97316; font-weight: 600; }",
+    "isActive": true
+  },
+  {
+    "name": "Blue Geometric Creative",
+    "category": "creative",
+    "thumbnail": "/templates/Blue and Black Geometric Creative Resume.png",
+    "structure": {
+      "layout": "two-column",
+      "colors": { "primary": "#3b82f6", "secondary": "#1e293b", "text": "#334155", "background": "#ffffff" },
+      "fonts": { "heading": "Inter", "body": "Inter" },
+      "sections": [
+        { "type": "header", "order": 1, "visible": true },
+        { "type": "summary", "order": 2, "visible": true },
+        { "type": "experience", "order": 3, "visible": true },
+        { "type": "education", "order": 4, "visible": true },
+        { "type": "skills", "order": 5, "visible": true }
+      ]
+    },
+    "htmlTemplate": "<div class='resume-container'><div class='header'><h1>{{fullName}}</h1><p>{{email}} | {{phone}} | {{location}}</p></div><div class='summary'><h2>Professional Summary</h2><p>{{summary}}</p></div><div class='experience'><h2>Experience</h2>{{#each experience}}<div class='job'><h3>{{title}}</h3><p class='company'>{{company}} | {{duration}}</p><p>{{description}}</p></div>{{/each}}</div><div class='education'><h2>Education</h2>{{#each education}}<div class='degree'><h3>{{degree}}</h3><p>{{school}} | {{year}}</p></div>{{/each}}</div><div class='skills'><h2>Skills</h2><p>{{skills}}</p></div></div>",
+    "cssTemplate": ".resume-container { font-family: Inter, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; }",
+    "isActive": true
+  },
+  {
+    "name": "Blue & White Modern",
+    "category": "modern",
+    "thumbnail": "/templates/Blue and White Modern Professional Resume.png",
+    "structure": {
+      "layout": "single-column",
+      "colors": { "primary": "#2563eb", "secondary": "#64748b", "text": "#1e293b", "background": "#ffffff" },
+      "fonts": { "heading": "Inter", "body": "Inter" },
+      "sections": [
+        { "type": "header", "order": 1, "visible": true },
+        { "type": "summary", "order": 2, "visible": true },
+        { "type": "experience", "order": 3, "visible": true },
+        { "type": "education", "order": 4, "visible": true },
+        { "type": "skills", "order": 5, "visible": true }
+      ]
+    },
+    "htmlTemplate": "<div class='resume-container'><div class='header'><h1>{{fullName}}</h1><p>{{email}} | {{phone}} | {{location}}</p></div><div class='summary'><h2>Professional Summary</h2><p>{{summary}}</p></div><div class='experience'><h2>Experience</h2>{{#each experience}}<div class='job'><h3>{{title}}</h3><p class='company'>{{company}} | {{duration}}</p><p>{{description}}</p></div>{{/each}}</div><div class='education'><h2>Education</h2>{{#each education}}<div class='degree'><h3>{{degree}}</h3><p>{{school}} | {{year}}</p></div>{{/each}}</div><div class='skills'><h2>Skills</h2><p>{{skills}}</p></div></div>",
+    "cssTemplate": ".resume-container { font-family: Inter, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; }",
+    "isActive": true
+  },
+  {
+    "name": "Blue Minimalist Modern",
+    "category": "minimalist",
+    "thumbnail": "/templates/blue Minimalist modern CV resume.png",
+    "structure": {
+      "layout": "single-column",
+      "colors": { "primary": "#3b82f6", "secondary": "#64748b", "text": "#1e293b", "background": "#ffffff" },
+      "fonts": { "heading": "Inter", "body": "Inter" },
+      "sections": [
+        { "type": "header", "order": 1, "visible": true },
+        { "type": "summary", "order": 2, "visible": true },
+        { "type": "experience", "order": 3, "visible": true },
+        { "type": "education", "order": 4, "visible": true },
+        { "type": "skills", "order": 5, "visible": true }
+      ]
+    },
+    "htmlTemplate": "<div class='resume-container'><div class='header'><h1>{{fullName}}</h1><p>{{email}} | {{phone}} | {{location}}</p></div><div class='summary'><h2>Professional Summary</h2><p>{{summary}}</p></div><div class='experience'><h2>Experience</h2>{{#each experience}}<div class='job'><h3>{{title}}</h3><p class='company'>{{company}} | {{duration}}</p><p>{{description}}</p></div>{{/each}}</div><div class='education'><h2>Education</h2>{{#each education}}<div class='degree'><h3>{{degree}}</h3><p>{{school}} | {{year}}</p></div>{{/each}}</div><div class='skills'><h2>Skills</h2><p>{{skills}}</p></div></div>",
+    "cssTemplate": ".resume-container { font-family: Inter, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; }",
+    "isActive": true
+  },
+  {
+    "name": "Marketing Manager",
+    "category": "professional",
+    "thumbnail": "/templates/Blue Simple Professional Marketing Manager CV Resume.png",
+    "structure": {
+      "layout": "single-column",
+      "colors": { "primary": "#2563eb", "secondary": "#64748b", "text": "#1e293b", "background": "#ffffff" },
+      "fonts": { "heading": "Inter", "body": "Inter" },
+      "sections": [
+        { "type": "header", "order": 1, "visible": true },
+        { "type": "summary", "order": 2, "visible": true },
+        { "type": "experience", "order": 3, "visible": true },
+        { "type": "education", "order": 4, "visible": true },
+        { "type": "skills", "order": 5, "visible": true }
+      ]
+    },
+    "htmlTemplate": "<div class='resume-container'><div class='header'><h1>{{fullName}}</h1><p>{{email}} | {{phone}} | {{location}}</p></div><div class='summary'><h2>Professional Summary</h2><p>{{summary}}</p></div><div class='experience'><h2>Experience</h2>{{#each experience}}<div class='job'><h3>{{title}}</h3><p class='company'>{{company}} | {{duration}}</p><p>{{description}}</p></div>{{/each}}</div><div class='education'><h2>Education</h2>{{#each education}}<div class='degree'><h3>{{degree}}</h3><p>{{school}} | {{year}}</p></div>{{/each}}</div><div class='skills'><h2>Skills</h2><p>{{skills}}</p></div></div>",
+    "cssTemplate": ".resume-container { font-family: Inter, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; }",
+    "isActive": true
+  },
+  {
+    "name": "HR Manager Professional",
+    "category": "professional",
+    "thumbnail": "/templates/Dark Blue & White Modern Clean HR Manager Professional Resume.png",
+    "structure": {
+      "layout": "single-column",
+      "colors": { "primary": "#1e40af", "secondary": "#64748b", "text": "#1e293b", "background": "#ffffff" },
+      "fonts": { "heading": "Inter", "body": "Inter" },
+      "sections": [
+        { "type": "header", "order": 1, "visible": true },
+        { "type": "summary", "order": 2, "visible": true },
+        { "type": "experience", "order": 3, "visible": true },
+        { "type": "education", "order": 4, "visible": true },
+        { "type": "skills", "order": 5, "visible": true }
+      ]
+    },
+    "htmlTemplate": "<div class='resume-container'><div class='header'><h1>{{fullName}}</h1><p>{{email}} | {{phone}} | {{location}}</p></div><div class='summary'><h2>Professional Summary</h2><p>{{summary}}</p></div><div class='experience'><h2>Experience</h2>{{#each experience}}<div class='job'><h3>{{title}}</h3><p class='company'>{{company}} | {{duration}}</p><p>{{description}}</p></div>{{/each}}</div><div class='education'><h2>Education</h2>{{#each education}}<div class='degree'><h3>{{degree}}</h3><p>{{school}} | {{year}}</p></div>{{/each}}</div><div class='skills'><h2>Skills</h2><p>{{skills}}</p></div></div>",
+    "cssTemplate": ".resume-container { font-family: Inter, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; }",
+    "isActive": true
+  },
+  {
+    "name": "Gray & Green Simple",
+    "category": "minimalist",
+    "thumbnail": "/templates/Gray and Green Simple Professional  CV Resume.png",
+    "structure": {
+      "layout": "single-column",
+      "colors": { "primary": "#10b981", "secondary": "#6b7280", "text": "#1f2937", "background": "#ffffff" },
+      "fonts": { "heading": "Inter", "body": "Inter" },
+      "sections": [
+        { "type": "header", "order": 1, "visible": true },
+        { "type": "summary", "order": 2, "visible": true },
+        { "type": "experience", "order": 3, "visible": true },
+        { "type": "education", "order": 4, "visible": true },
+        { "type": "skills", "order": 5, "visible": true }
+      ]
+    },
+    "htmlTemplate": "<div class='resume-container'><div class='header'><h1>{{fullName}}</h1><p>{{email}} | {{phone}} | {{location}}</p></div><div class='summary'><h2>Professional Summary</h2><p>{{summary}}</p></div><div class='experience'><h2>Experience</h2>{{#each experience}}<div class='job'><h3>{{title}}</h3><p class='company'>{{company}} | {{duration}}</p><p>{{description}}</p></div>{{/each}}</div><div class='education'><h2>Education</h2>{{#each education}}<div class='degree'><h3>{{degree}}</h3><p>{{school}} | {{year}}</p></div>{{/each}}</div><div class='skills'><h2>Skills</h2><p>{{skills}}</p></div></div>",
+    "cssTemplate": ".resume-container { font-family: Inter, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; }",
+    "isActive": true
+  },
+  {
+    "name": "Green Elegant",
+    "category": "executive",
+    "thumbnail": "/templates/Green Elegant Professional Resume.png",
+    "structure": {
+      "layout": "single-column",
+      "colors": { "primary": "#059669", "secondary": "#64748b", "text": "#1e293b", "background": "#ffffff" },
+      "fonts": { "heading": "Inter", "body": "Inter" },
+      "sections": [
+        { "type": "header", "order": 1, "visible": true },
+        { "type": "summary", "order": 2, "visible": true },
+        { "type": "experience", "order": 3, "visible": true },
+        { "type": "education", "order": 4, "visible": true },
+        { "type": "skills", "order": 5, "visible": true }
+      ]
+    },
+    "htmlTemplate": "<div class='resume-container'><div class='header'><h1>{{fullName}}</h1><p>{{email}} | {{phone}} | {{location}}</p></div><div class='summary'><h2>Professional Summary</h2><p>{{summary}}</p></div><div class='experience'><h2>Experience</h2>{{#each experience}}<div class='job'><h3>{{title}}</h3><p class='company'>{{company}} | {{duration}}</p><p>{{description}}</p></div>{{/each}}</div><div class='education'><h2>Education</h2>{{#each education}}<div class='degree'><h3>{{degree}}</h3><p>{{school}} | {{year}}</p></div>{{/each}}</div><div class='skills'><h2>Skills</h2><p>{{skills}}</p></div></div>",
+    "cssTemplate": ".resume-container { font-family: Inter, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; }",
+    "isActive": true
+  },
+  {
+    "name": "IT Manager",
+    "category": "professional",
+    "thumbnail": "/templates/IT Manager CV Resume.png",
+    "structure": {
+      "layout": "two-column",
+      "colors": { "primary": "#2563eb", "secondary": "#64748b", "text": "#1e293b", "background": "#ffffff" },
+      "fonts": { "heading": "Inter", "body": "Inter" },
+      "sections": [
+        { "type": "header", "order": 1, "visible": true },
+        { "type": "summary", "order": 2, "visible": true },
+        { "type": "experience", "order": 3, "visible": true },
+        { "type": "education", "order": 4, "visible": true },
+        { "type": "skills", "order": 5, "visible": true }
+      ]
+    },
+    "htmlTemplate": "<div class='resume-container'><div class='header'><h1>{{fullName}}</h1><p>{{email}} | {{phone}} | {{location}}</p></div><div class='summary'><h2>Professional Summary</h2><p>{{summary}}</p></div><div class='experience'><h2>Experience</h2>{{#each experience}}<div class='job'><h3>{{title}}</h3><p class='company'>{{company}} | {{duration}}</p><p>{{description}}</p></div>{{/each}}</div><div class='education'><h2>Education</h2>{{#each education}}<div class='degree'><h3>{{degree}}</h3><p>{{school}} | {{year}}</p></div>{{/each}}</div><div class='skills'><h2>Skills</h2><p>{{skills}}</p></div></div>",
+    "cssTemplate": ".resume-container { font-family: Inter, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; }",
+    "isActive": true
+  },
+  {
+    "name": "Minimalist CV",
+    "category": "minimalist",
+    "thumbnail": "/templates/Minimalist CV Resume.png",
+    "structure": {
+      "layout": "single-column",
+      "colors": { "primary": "#0f172a", "secondary": "#64748b", "text": "#1e293b", "background": "#ffffff" },
+      "fonts": { "heading": "Inter", "body": "Inter" },
+      "sections": [
+        { "type": "header", "order": 1, "visible": true },
+        { "type": "summary", "order": 2, "visible": true },
+        { "type": "experience", "order": 3, "visible": true },
+        { "type": "education", "order": 4, "visible": true },
+        { "type": "skills", "order": 5, "visible": true }
+      ]
+    },
+    "htmlTemplate": "<div class='resume-container'><div class='header'><h1>{{fullName}}</h1><p>{{email}} | {{phone}} | {{location}}</p></div><div class='summary'><h2>Professional Summary</h2><p>{{summary}}</p></div><div class='experience'><h2>Experience</h2>{{#each experience}}<div class='job'><h3>{{title}}</h3><p class='company'>{{company}} | {{duration}}</p><p>{{description}}</p></div>{{/each}}</div><div class='education'><h2>Education</h2>{{#each education}}<div class='degree'><h3>{{degree}}</h3><p>{{school}} | {{year}}</p></div>{{/each}}</div><div class='skills'><h2>Skills</h2><p>{{skills}}</p></div></div>",
+    "cssTemplate": ".resume-container { font-family: Inter, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; }",
+    "isActive": true
+  },
+  {
+    "name": "Professional Modern",
+    "category": "modern",
+    "thumbnail": "/templates/Professional Modern CV Resume.png",
+    "structure": {
+      "layout": "single-column",
+      "colors": { "primary": "#2563eb", "secondary": "#64748b", "text": "#1e293b", "background": "#ffffff" },
+      "fonts": { "heading": "Inter", "body": "Inter" },
+      "sections": [
+        { "type": "header", "order": 1, "visible": true },
+        { "type": "summary", "order": 2, "visible": true },
+        { "type": "experience", "order": 3, "visible": true },
+        { "type": "education", "order": 4, "visible": true },
+        { "type": "skills", "order": 5, "visible": true }
+      ]
+    },
+    "htmlTemplate": "<div class='resume-container'><div class='header'><h1>{{fullName}}</h1><p>{{email}} | {{phone}} | {{location}}</p></div><div class='summary'><h2>Professional Summary</h2><p>{{summary}}</p></div><div class='experience'><h2>Experience</h2>{{#each experience}}<div class='job'><h3>{{title}}</h3><p class='company'>{{company}} | {{duration}}</p><p>{{description}}</p></div>{{/each}}</div><div class='education'><h2>Education</h2>{{#each education}}<div class='degree'><h3>{{degree}}</h3><p>{{school}} | {{year}}</p></div>{{/each}}</div><div class='skills'><h2>Skills</h2><p>{{skills}}</p></div></div>",
+    "cssTemplate": ".resume-container { font-family: Inter, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; }",
+    "isActive": true
+  },
+  {
+    "name": "Simple Professional",
+    "category": "professional",
+    "thumbnail": "/templates/Simple Professional CV Resume.png",
+    "structure": {
+      "layout": "single-column",
+      "colors": { "primary": "#2563eb", "secondary": "#64748b", "text": "#1e293b", "background": "#ffffff" },
+      "fonts": { "heading": "Inter", "body": "Inter" },
+      "sections": [
+        { "type": "header", "order": 1, "visible": true },
+        { "type": "summary", "order": 2, "visible": true },
+        { "type": "experience", "order": 3, "visible": true },
+        { "type": "education", "order": 4, "visible": true },
+        { "type": "skills", "order": 5, "visible": true }
+      ]
+    },
+    "htmlTemplate": "<div class='resume-container'><div class='header'><h1>{{fullName}}</h1><p>{{email}} | {{phone}} | {{location}}</p></div><div class='summary'><h2>Professional Summary</h2><p>{{summary}}</p></div><div class='experience'><h2>Experience</h2>{{#each experience}}<div class='job'><h3>{{title}}</h3><p class='company'>{{company}} | {{duration}}</p><p>{{description}}</p></div>{{/each}}</div><div class='education'><h2>Education</h2>{{#each education}}<div class='degree'><h3>{{degree}}</h3><p>{{school}} | {{year}}</p></div>{{/each}}</div><div class='skills'><h2>Skills</h2><p>{{skills}}</p></div></div>",
+    "cssTemplate": ".resume-container { font-family: Inter, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; }",
+    "isActive": true
+  }
+]

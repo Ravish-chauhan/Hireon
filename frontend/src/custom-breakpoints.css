@@ -1,0 +1,20 @@
+/* Custom breakpoint at 850px */
+@media (min-width: 850px) {
+  .custom-850\:flex {
+    display: flex;
+  }
+  
+  .custom-850\:hidden {
+    display: none;
+  }
+}
+
+@media (max-width: 849px) {
+  .max-custom-850\:flex {
+    display: flex;
+  }
+  
+  .max-custom-850\:hidden {
+    display: none;
+  }
+}

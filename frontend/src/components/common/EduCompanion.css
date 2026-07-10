@@ -1,0 +1,403 @@
+/* ============================================
+   EDU COMPANION - Award-Winning Floating Orb
+   ============================================ */
+
+/* Keyframe Animations */
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 
+      0 0 30px rgba(248, 168, 89, 0.4),
+      0 0 60px rgba(248, 168, 89, 0.2),
+      inset 0 0 30px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 
+      0 0 40px rgba(248, 168, 89, 0.6),
+      0 0 80px rgba(248, 168, 89, 0.3),
+      inset 0 0 40px rgba(255, 255, 255, 0.15);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes gradient-rotate {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes bubble-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(200px) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in-panel {
+  0% {
+    transform: translateX(100%) scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(20deg);
+  }
+  75% {
+    transform: rotate(-15deg);
+  }
+}
+
+/* The Orb Container */
+.edu-companion {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+/* The Glowing Orb */
+.edu-orb {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  animation: float 6s ease-in-out infinite;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.edu-orb:hover {
+  transform: scale(1.15);
+}
+
+.edu-orb-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, 
+    #f8a859 0%, 
+    #FF6B6B 35%, 
+    #0F0C89 100%
+  );
+  animation: breathe 4s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.edu-orb-inner::before {
+  content: '';
+  position: absolute;
+  top: 15%;
+  left: 20%;
+  width: 30%;
+  height: 20%;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  filter: blur(4px);
+}
+
+.edu-orb-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 50%
+  );
+}
+
+/* Pulse Rings */
+.edu-orb-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(248, 168, 89, 0.5);
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+.edu-orb-ring:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.edu-orb-ring:nth-child(3) {
+  animation-delay: 1s;
+}
+
+/* Floating Particles */
+.edu-particles {
+  position: absolute;
+  inset: -30px;
+  pointer-events: none;
+}
+
+.edu-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(135deg, #f8a859, #FF6B6B);
+  border-radius: 50%;
+  animation: bubble-float 4s ease-in-out infinite;
+}
+
+.edu-particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+.edu-particle:nth-child(2) { left: 30%; animation-delay: 1s; }
+.edu-particle:nth-child(3) { left: 50%; animation-delay: 0.5s; }
+.edu-particle:nth-child(4) { left: 70%; animation-delay: 1.5s; }
+.edu-particle:nth-child(5) { left: 90%; animation-delay: 0.8s; }
+
+/* Speech Bubble */
+.edu-speech {
+  background: white;
+  padding: 12px 16px;
+  border-radius: 16px;
+  box-shadow: 
+    0 10px 40px -10px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  max-width: 220px;
+  transform-origin: bottom right;
+  animation: slide-in-panel 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.edu-speech::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  right: 24px;
+  width: 16px;
+  height: 16px;
+  background: white;
+  transform: rotate(45deg);
+  box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 4px 0;
+}
+
+.edu-speech-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a2e;
+  line-height: 1.5;
+}
+
+.edu-speech-wave {
+  display: inline-block;
+  animation: wave 1s ease-in-out infinite;
+  transform-origin: 70% 70%;
+}
+
+/* Slide-out Panel */
+.edu-panel {
+  position: fixed;
+  bottom: 24px;
+  right: 100px;
+  width: 380px;
+  max-height: calc(100vh - 48px);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  box-shadow: 
+    0 25px 80px -20px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+  overflow: hidden;
+  animation: slide-in-panel 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 9998;
+}
+
+.edu-panel-header {
+  padding: 24px 24px 16px;
+  background: linear-gradient(135deg, #0F0C89 0%, #1a1462 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.edu-panel-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 0% 0%, rgba(248, 168, 89, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(255, 107, 107, 0.3) 0%, transparent 50%);
+}
+
+.edu-panel-header-content {
+  position: relative;
+  z-index: 1;
+}
+
+.edu-panel-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edu-panel-subtitle {
+  font-size: 13px;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+.edu-panel-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 2;
+}
+
+.edu-panel-close:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+.edu-panel-body {
+  padding: 20px 24px 24px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* Override LeadForm styles inside panel */
+.edu-panel-body > div > div {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Success Celebration */
+.edu-celebration {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10000;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  animation: confetti-fall 3s ease-out forwards;
+}
+
+/* Mobile Styles */
+@media (max-width: 640px) {
+  .edu-companion {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .edu-orb {
+    width: 52px;
+    height: 52px;
+  }
+
+  .edu-panel {
+    left: 16px;
+    right: 16px;
+    bottom: 80px;
+    width: auto;
+    max-height: 70vh;
+    border-radius: 20px;
+  }
+
+  .edu-speech {
+    max-width: 180px;
+    padding: 10px 14px;
+  }
+
+  .edu-speech-text {
+    font-size: 13px;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .edu-orb,
+  .edu-orb-inner,
+  .edu-orb-ring,
+  .edu-particle,
+  .edu-speech-wave {
+    animation: none;
+  }
+}

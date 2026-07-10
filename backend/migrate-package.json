@@ -1,0 +1,6 @@
+{
+  "name": "gmat-migration",
+  "scripts": {
+    "migrate-gmat": "node scripts/migrateGMATQuestions.js"
+  }
+}
