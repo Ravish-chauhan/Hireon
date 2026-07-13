@@ -63,7 +63,20 @@ export function FinalDraftPage({ onNavigate }: FinalDraftPageProps) {
     fontSizeName: 32,
     fontSizeHeading: 16,
     fontSizeBody: 13,
-    lineSpacing: 1.5
+    lineSpacing: 1.5,
+    skillsLayout: 'inline-wrap',
+    skillsSeparator: ' • ',
+    spacingSkillsItem: 8,
+    spacingSection: 24,
+    spacingSectionHeading: 12,
+    spacingItem: 20,
+    spacingRoleCompany: 4,
+    spacingRoleDescription: 8,
+    spacingListItems: 4,
+    spacingSkillsRow: 8,
+    headerAlignment: 'left',
+    spacingNameTitle: 6,
+    spacingTitleContact: 8
   })
   
   const [activeTab, setActiveTab] = useState<'design' | 'typography' | 'templates'>('typography')
@@ -378,7 +391,7 @@ export function FinalDraftPage({ onNavigate }: FinalDraftPageProps) {
 
   const renderCurrentView = () => {
     if (currentView === 'resume') {
-      return <TemplateComponent data={templateData} />
+      return <TemplateComponent data={{ ...templateData, settings: documentSettings }} />
     } else if (currentView === 'sop' && sopData) {
       return (
         <div className="p-8 bg-white h-full">
@@ -419,7 +432,7 @@ export function FinalDraftPage({ onNavigate }: FinalDraftPageProps) {
         </div>
       )
     }
-    return <TemplateComponent data={templateData} />
+    return <TemplateComponent data={{ ...templateData, settings: documentSettings }} />
   }
 
   const handleSectionClick = (sectionIndex: number) => {
@@ -437,7 +450,7 @@ export function FinalDraftPage({ onNavigate }: FinalDraftPageProps) {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen bg-[#2C3E5F]">
+    <div className="flex flex-col lg:flex-row h-screen overflow-hidden bg-[#2C3E5F]">
       {/* Left Sidebar - Canva-Style Editor - Hidden on Mobile */}
       <aside className="hidden lg:flex w-96 flex-col border-r border-gray-700 bg-[#1E293B]">
         <div className="p-6 pb-2 border-b border-gray-700">
@@ -474,7 +487,7 @@ export function FinalDraftPage({ onNavigate }: FinalDraftPageProps) {
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto custom-scrollbar p-6">
+        <div className="flex-1 overflow-y-auto custom-scrollbar p-6" data-lenis-prevent>
           {activeTab === 'design' && (
             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-300">
               <div className="space-y-6">
@@ -521,6 +534,147 @@ export function FinalDraftPage({ onNavigate }: FinalDraftPageProps) {
                       onChange={(e) => setDocumentSettings(s => ({ ...s, lineSpacing: Number(e.target.value) }))}
                       className="w-full accent-[#FF6B5A]"
                     />
+                  </div>
+
+                  {/* Advanced Spacing Settings */}
+                  <div className="border-t border-gray-700 pt-4 mt-4 space-y-5">
+                    <h4 className="text-gray-400 text-xs font-bold uppercase tracking-wider">Advanced Margins</h4>
+
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <label className="text-sm text-gray-300 font-medium">Section Gap</label>
+                        <span className="text-xs font-semibold bg-gray-700 text-gray-300 px-2 py-1 rounded">{documentSettings.spacingSection}px</span>
+                      </div>
+                      <input type="range" min="8" max="48" step="1" value={documentSettings.spacingSection} onChange={(e) => setDocumentSettings(s => ({ ...s, spacingSection: Number(e.target.value) }))} className="w-full accent-[#FF6B5A]" />
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <label className="text-sm text-gray-300 font-medium">Section Heading Gap</label>
+                        <span className="text-xs font-semibold bg-gray-700 text-gray-300 px-2 py-1 rounded">{documentSettings.spacingSectionHeading}px</span>
+                      </div>
+                      <input type="range" min="0" max="32" step="1" value={documentSettings.spacingSectionHeading} onChange={(e) => setDocumentSettings(s => ({ ...s, spacingSectionHeading: Number(e.target.value) }))} className="w-full accent-[#FF6B5A]" />
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <label className="text-sm text-gray-300 font-medium">Item Gap</label>
+                        <span className="text-xs font-semibold bg-gray-700 text-gray-300 px-2 py-1 rounded">{documentSettings.spacingItem}px</span>
+                      </div>
+                      <input type="range" min="4" max="32" step="1" value={documentSettings.spacingItem} onChange={(e) => setDocumentSettings(s => ({ ...s, spacingItem: Number(e.target.value) }))} className="w-full accent-[#FF6B5A]" />
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <label className="text-sm text-gray-300 font-medium">Role / Company Gap</label>
+                        <span className="text-xs font-semibold bg-gray-700 text-gray-300 px-2 py-1 rounded">{documentSettings.spacingRoleCompany}px</span>
+                      </div>
+                      <input type="range" min="0" max="16" step="1" value={documentSettings.spacingRoleCompany} onChange={(e) => setDocumentSettings(s => ({ ...s, spacingRoleCompany: Number(e.target.value) }))} className="w-full accent-[#FF6B5A]" />
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <label className="text-sm text-gray-300 font-medium">Description Gap</label>
+                        <span className="text-xs font-semibold bg-gray-700 text-gray-300 px-2 py-1 rounded">{documentSettings.spacingRoleDescription}px</span>
+                      </div>
+                      <input type="range" min="0" max="24" step="1" value={documentSettings.spacingRoleDescription} onChange={(e) => setDocumentSettings(s => ({ ...s, spacingRoleDescription: Number(e.target.value) }))} className="w-full accent-[#FF6B5A]" />
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <label className="text-sm text-gray-300 font-medium">Bullet Point Gap</label>
+                        <span className="text-xs font-semibold bg-gray-700 text-gray-300 px-2 py-1 rounded">{documentSettings.spacingListItems}px</span>
+                      </div>
+                      <input type="range" min="0" max="16" step="1" value={documentSettings.spacingListItems} onChange={(e) => setDocumentSettings(s => ({ ...s, spacingListItems: Number(e.target.value) }))} className="w-full accent-[#FF6B5A]" />
+                    </div>
+                  </div>
+
+                  <div className="border-t border-gray-700 pt-4 mt-4 space-y-5">
+                    <h4 className="text-gray-400 text-xs font-bold uppercase tracking-wider">Header Styling</h4>
+
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <label className="text-sm text-gray-300 font-medium">Header Alignment</label>
+                      </div>
+                      <select
+                        value={documentSettings.headerAlignment}
+                        onChange={(e) => setDocumentSettings(s => ({ ...s, headerAlignment: e.target.value }))}
+                        className="w-full p-2.5 bg-gray-900 text-white rounded-lg border border-gray-700 focus:border-[#FF6B5A] outline-none text-sm transition-colors"
+                      >
+                        <option value="left">Left</option>
+                        <option value="center">Center</option>
+                        <option value="right">Right</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <label className="text-sm text-gray-300 font-medium">Name & Title Spacing</label>
+                        <span className="text-xs font-semibold bg-gray-700 text-gray-300 px-2 py-1 rounded">{documentSettings.spacingNameTitle}px</span>
+                      </div>
+                      <input type="range" min="0" max="24" step="1" value={documentSettings.spacingNameTitle} onChange={(e) => setDocumentSettings(s => ({ ...s, spacingNameTitle: Number(e.target.value) }))} className="w-full accent-[#FF6B5A]" />
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <label className="text-sm text-gray-300 font-medium">Title & Contact Spacing</label>
+                        <span className="text-xs font-semibold bg-gray-700 text-gray-300 px-2 py-1 rounded">{documentSettings.spacingTitleContact}px</span>
+                      </div>
+                      <input type="range" min="0" max="24" step="1" value={documentSettings.spacingTitleContact} onChange={(e) => setDocumentSettings(s => ({ ...s, spacingTitleContact: Number(e.target.value) }))} className="w-full accent-[#FF6B5A]" />
+                    </div>
+                  </div>
+
+                  <div className="border-t border-gray-700 pt-4 mt-4 space-y-5">
+                    <h4 className="text-gray-400 text-xs font-bold uppercase tracking-wider">Skills Styling</h4>
+
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <label className="text-sm text-gray-300 font-medium">Skills Layout</label>
+                      </div>
+                      <select
+                        value={documentSettings.skillsLayout}
+                        onChange={(e) => setDocumentSettings(s => ({ ...s, skillsLayout: e.target.value }))}
+                        className="w-full p-2.5 bg-gray-900 text-white rounded-lg border border-gray-700 focus:border-[#FF6B5A] outline-none text-sm transition-colors"
+                      >
+                        <option value="inline-wrap">Inline Flow (Side-by-side wrap)</option>
+                        <option value="inline-stacked">Stacked Row (One category per line, inline)</option>
+                        <option value="block">Block (One category per line, values below)</option>
+                        <option value="two-column">Two Column Grid</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <label className="text-sm text-gray-300 font-medium">Skills Separator</label>
+                      </div>
+                      <select
+                        value={documentSettings.skillsSeparator}
+                        onChange={(e) => setDocumentSettings(s => ({ ...s, skillsSeparator: e.target.value }))}
+                        className="w-full p-2.5 bg-gray-900 text-white rounded-lg border border-gray-700 focus:border-[#FF6B5A] outline-none text-sm transition-colors"
+                      >
+                        <option value=" • ">Bullet ( • )</option>
+                        <option value=", ">Comma (, )</option>
+                        <option value=" | ">Pipe ( | )</option>
+                        <option value=" - ">Dash ( - )</option>
+                        <option value=" ">Space Only</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <label className="text-sm text-gray-300 font-medium">Skill Item Gap</label>
+                        <span className="text-xs font-semibold bg-gray-700 text-gray-300 px-2 py-1 rounded">{documentSettings.spacingSkillsItem}px</span>
+                      </div>
+                      <input type="range" min="0" max="24" step="1" value={documentSettings.spacingSkillsItem} onChange={(e) => setDocumentSettings(s => ({ ...s, spacingSkillsItem: Number(e.target.value) }))} className="w-full accent-[#FF6B5A]" />
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <label className="text-sm text-gray-300 font-medium">Category Row Gap</label>
+                        <span className="text-xs font-semibold bg-gray-700 text-gray-300 px-2 py-1 rounded">{documentSettings.spacingSkillsRow}px</span>
+                      </div>
+                      <input type="range" min="0" max="32" step="1" value={documentSettings.spacingSkillsRow} onChange={(e) => setDocumentSettings(s => ({ ...s, spacingSkillsRow: Number(e.target.value) }))} className="w-full accent-[#FF6B5A]" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -740,6 +894,7 @@ export function FinalDraftPage({ onNavigate }: FinalDraftPageProps) {
         <div
           ref={containerRef}
           className="flex-1 p-4 lg:p-8 flex flex-col items-center overflow-x-hidden overflow-y-auto bg-[#1a1f36] relative"
+          data-lenis-prevent
         >
           {/* Main Paper Wrapper */}
           <div
@@ -773,6 +928,16 @@ export function FinalDraftPage({ onNavigate }: FinalDraftPageProps) {
                   '--font-size-heading': `${documentSettings.fontSizeHeading}px`,
                   '--font-size-body': `${documentSettings.fontSizeBody}px`,
                   '--line-spacing': documentSettings.lineSpacing,
+                  '--spacing-section': `${documentSettings.spacingSection}px`,
+                  '--spacing-section-heading': `${documentSettings.spacingSectionHeading}px`,
+                  '--spacing-item': `${documentSettings.spacingItem}px`,
+                  '--spacing-role-company': `${documentSettings.spacingRoleCompany}px`,
+                  '--spacing-role-description': `${documentSettings.spacingRoleDescription}px`,
+                  '--spacing-list-items': `${documentSettings.spacingListItems}px`,
+                  '--spacing-skills-row': `${documentSettings.spacingSkillsRow}px`,
+                  '--spacing-name-title': `${documentSettings.spacingNameTitle}px`,
+                  '--spacing-title-contact': `${documentSettings.spacingTitleContact}px`,
+                  '--header-alignment': documentSettings.headerAlignment,
                 } as React.CSSProperties}
               >
                 <style>{`

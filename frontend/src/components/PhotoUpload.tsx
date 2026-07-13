@@ -32,16 +32,30 @@ export function PhotoUpload() {
           <UserIcon className="w-16 h-16 text-white" fill="currentColor" />
         )}
       </div>
-      <label className="flex items-center gap-2 text-[#4169FF] font-medium hover:underline cursor-pointer">
-        <PencilIcon className="w-3 h-3" />
-        <span className="text-sm">Upload photo</span>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handlePhotoUpload}
-          className="hidden"
-        />
-      </label>
+      <div className="flex items-center gap-4">
+        <label className="flex items-center gap-2 text-[#4169FF] font-medium hover:underline cursor-pointer">
+          <PencilIcon className="w-3 h-3" />
+          <span className="text-sm">{photo ? 'Change photo' : 'Upload photo'}</span>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handlePhotoUpload}
+            className="hidden"
+          />
+        </label>
+        {photo && (
+          <button 
+            type="button"
+            onClick={() => {
+              setPhoto(null)
+              updateBio({ ...resumeData.bio, image: undefined })
+            }}
+            className="flex items-center gap-2 text-red-500 font-medium hover:underline cursor-pointer"
+          >
+            <span className="text-sm">Remove</span>
+          </button>
+        )}
+      </div>
     </div>
   )
 }

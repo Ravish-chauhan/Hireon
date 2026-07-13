@@ -1,6 +1,8 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
+const { uploadResume } = require("../middleware/multer");
+const { extractTextFromPDF } = require("../../services/pdfExtractor");
 
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
@@ -106,6 +108,105 @@ GUIDELINES:
       updatedNodes: {},
       suggestions: ["Try rephrasing your request", "Check your internet connection"]
     });
+  }
+});
+
+// AI Resume Parsing Endpoint
+router.post('/parse-resume', uploadResume.single('resume'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: "Resume file missing" });
+    }
+
+    const fileUrl = req.file.path;
+    console.log('📄 Extracting text from PDF...', fileUrl);
+    
+    // Extract text
+    const extractedText = await extractTextFromPDF(fileUrl);
+    if (!extractedText) {
+      return res.status(400).json({ error: "Text extraction failed or PDF is empty" });
+    }
+
+    console.log('🤖 Parsing extracted text with AI...');
+    
+    const parsingPrompt = `You are an expert resume parser. Extract the information from the following resume text and map it STRICTLY to the provided JSON schema. 
+If information for a field is missing, leave it as an empty string "" or empty array []. Do not add any new fields not present in the schema (except for the keys inside the "skills" object, which must use the actual category names found in the resume).
+
+RESUME TEXT:
+"""
+${extractedText.substring(0, 8000)}
+"""
+
+JSON SCHEMA TO RETURN (Return ONLY valid JSON):
+{
+  "bio": {
+    "firstName": "", "surname": "", "city": "", "country": "",
+    "phone": "", "email": "", "linkedin": "", "github": "", "website": ""
+  },
+  "summary": { "jobTitle": "The person's main title", "content": "Professional summary" },
+  "experience": [{
+    "id": "exp-1", "jobTitle": "", "employer": "", "city": "", "country": "", 
+    "startMonth": "", "startYear": "", "endMonth": "", "endYear": "", 
+    "currentlyWorkHere": false, "description": "Bullet points joined by newlines"
+  }],
+  "education": [{
+    "id": "edu-1", "schoolName": "", "schoolLocation": "", "degree": "", "fieldOfStudy": "", 
+    "startMonth": "", "startYear": "", "gradMonth": "", "gradYear": "", "gpa": ""
+  }],
+  "skills": {
+    "Extract category name from resume (e.g., Languages, Frameworks)": ["skill1", "skill2"],
+    "Extract another category (e.g., Tools, Soft Skills)": ["skill3", "skill4"]
+  },
+  "projects": [{
+    "id": "proj-1", "projectName": "", "projectRole": "", 
+    "startMonth": "", "startYear": "", "endMonth": "", "endYear": "", 
+    "currentProject": false, "description": "Description of project"
+  }]
+}
+`;
+
+    const response = await axios.post(
+      GROQ_API_URL,
+      {
+        messages: [
+          {
+            role: 'system',
+            content: 'You are an expert resume parser. Always respond with valid JSON only, exactly matching the provided schema.'
+          },
+          {
+            role: 'user',
+            content: parsingPrompt
+          }
+        ],
+        model: 'llama-3.1-8b-instant',
+        temperature: 0.1,
+        max_tokens: 3000
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${GROQ_API_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    const content = response.data.choices[0].message.content;
+    let cleanContent = content.replace(/```json\n?|```\n?/g, '').trim();
+    
+    let parsedData;
+    try {
+      parsedData = JSON.parse(cleanContent);
+    } catch (parseError) {
+      console.error("JSON Parse Error:", parseError, cleanContent);
+      return res.status(500).json({ error: "AI returned invalid JSON" });
+    }
+
+    console.log('✅ AI Resume Parsing completed');
+    res.json({ success: true, data: parsedData });
+    
+  } catch (error) {
+    console.error('❌ Resume Parsing Error:', error.response?.data || error.message);
+    res.status(500).json({ error: "Failed to parse resume" });
   }
 });
 

@@ -120,6 +120,8 @@ class PDFService {
           bottom: '0',
           left: '0'
         },
+        displayHeaderFooter: false,
+        tagged: true, // IMPORTANT: Preserves hyperlinks in PDFs for accessibility and clickable links
         timeout: 60000,
         ...options
       });
@@ -135,7 +137,7 @@ class PDFService {
         throw new Error('PDF generation timed out. The resume might be too complex. Please try again.');
       } else if (error.message.includes('Protocol error')) {
         throw new Error('Browser communication error. Please try again.');
-      } else if (error.message.includes('Target closed')) {
+      } else if (error.message.includes('Target closed') || error.message.includes('Connection closed') || error.message.includes('Session closed')) {
         this.browser = null; // Reset so next call re-launches
         throw new Error('Browser was closed unexpectedly. Please try again.');
       }

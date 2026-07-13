@@ -52,6 +52,31 @@ const StatCounter = ({ end, suffix, label, prefix = '' }: { end: number; suffix:
   )
 }
 
+/* ─────────────────────────── How It Works Step ─────────────────────────── */
+const HowItWorksStep = ({ step, index, totalSteps }: any) => {
+  const { ref: stepRef, isVisible: stepVisible } = useScrollReveal({ delay: index * 150 })
+  return (
+    <div
+      ref={stepRef}
+      className={`text-center relative ${getAnimationClasses(stepVisible, 'fadeInUp', 'duration-700')}`}
+    >
+      {/* Connector line */}
+      {index < totalSteps - 1 && (
+        <div className="hidden md:block absolute top-14 left-[60%] w-[80%] h-px" style={{ background: `linear-gradient(to right, ${colors.lightBorder}, transparent)` }} />
+      )}
+
+      <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-6 relative" style={{ background: colors.coral + '12' }}>
+        <div style={{ color: colors.coral }}>{step.icon}</div>
+        <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white" style={{ background: colors.coral }}>
+          {step.step.replace('0', '')}
+        </span>
+      </div>
+      <h3 className="text-xl font-bold mb-3" style={{ color: colors.softBlack }}>{step.title}</h3>
+      <p className="text-sm leading-relaxed max-w-xs mx-auto" style={{ color: colors.warmGray }}>{step.description}</p>
+    </div>
+  )
+}
+
 /* ─────────────────────────── Feature Card ─────────────────────────── */
 const FeatureCard = ({
   icon,
@@ -399,30 +424,9 @@ const HomePage: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-              {howItWorks.map((step, i) => {
-                const { ref: stepRef, isVisible: stepVisible } = useScrollReveal({ delay: i * 150 })
-                return (
-                  <div
-                    key={i}
-                    ref={stepRef}
-                    className={`text-center relative ${getAnimationClasses(stepVisible, 'fadeInUp', 'duration-700')}`}
-                  >
-                    {/* Connector line */}
-                    {i < howItWorks.length - 1 && (
-                      <div className="hidden md:block absolute top-14 left-[60%] w-[80%] h-px" style={{ background: `linear-gradient(to right, ${colors.lightBorder}, transparent)` }} />
-                    )}
-
-                    <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-6 relative" style={{ background: colors.coral + '12' }}>
-                      <div style={{ color: colors.coral }}>{step.icon}</div>
-                      <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white" style={{ background: colors.coral }}>
-                        {step.step.replace('0', '')}
-                      </span>
-                    </div>
-                    <h3 className="text-xl font-bold mb-3" style={{ color: colors.softBlack }}>{step.title}</h3>
-                    <p className="text-sm leading-relaxed max-w-xs mx-auto" style={{ color: colors.warmGray }}>{step.description}</p>
-                  </div>
-                )
-              })}
+              {howItWorks.map((step, i) => (
+                <HowItWorksStep key={i} step={step} index={i} totalSteps={howItWorks.length} />
+              ))}
             </div>
           </div>
         </section>

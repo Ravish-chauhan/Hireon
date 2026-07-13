@@ -8,6 +8,12 @@ export interface BasicInfo {
   profilePicture: string;
 }
 
+export interface SocialLink {
+  id: string;
+  platform: string;
+  url: string;
+}
+
 export interface PersonalInfo {
   name: string;
   title: string;
@@ -20,6 +26,8 @@ export interface PersonalInfo {
     github?: string;
     website?: string;
     portfolio?: string;
+    socialLinks?: SocialLink[];
+    socialLinksFormat?: 'name' | 'url';
   };
 }
 
@@ -139,6 +147,7 @@ export interface TemplateResumeData {
   volunteer?: { id: string; organization: string; role: string; description: string; startDate: string; endDate: string; }[];
   customSections?: CustomSection[];
   sectionOrder: string[];
+  settings?: any;
 }
 
 export interface ResumeData {
@@ -152,4 +161,5 @@ export interface ResumeData {
   aiJobDescription: string;
   generatedSummary: string;
   generatedKeywords: string[];
-}
+  settings?: any;
+}

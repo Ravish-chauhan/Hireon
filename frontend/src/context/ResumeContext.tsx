@@ -16,6 +16,8 @@ type ResumeFormData = {
     github?: string
     website?: string
     image?: string
+    socialLinks?: { id: string; platform: string; url: string }[]
+    socialLinksFormat?: 'name' | 'url'
   }
   // Summary with job context
   summary: {
@@ -139,6 +141,7 @@ type ResumeContextType = {
   updateProjects: (projects: ResumeFormData['projects']) => void
   updateOptionalDetails: (details: Partial<ResumeFormData['optionalDetails']>) => void
   setSelectedTemplate: (templateId: string) => void
+  setResumeData: React.Dispatch<React.SetStateAction<ResumeFormData>>
 }
 
 const ResumeContext = createContext<ResumeContextType | undefined>(undefined)
@@ -224,7 +227,7 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
   const templateData: TemplateResumeData = useMemo(() => ({
     personalInfo: {
       name: `${resumeData.bio?.firstName || ''} ${resumeData.bio?.surname || ''}`.trim() || 'Your Name',
-      title: resumeData.summary?.jobTitle || 'Professional',
+      title: resumeData.summary?.jobTitle || '',
       image: resumeData.bio?.image,
       contact: {
         email: resumeData.bio?.email || '',
@@ -232,7 +235,13 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
         location: `${resumeData.bio?.city || ''}, ${resumeData.bio?.country || ''}`.replace(', ', '') || '',
         linkedin: resumeData.bio?.linkedin,
         github: resumeData.bio?.github,
-        website: resumeData.bio?.website
+        website: resumeData.bio?.website,
+        socialLinks: resumeData.bio?.socialLinks?.length ? resumeData.bio.socialLinks : [
+          ...(resumeData.bio?.linkedin ? [{ id: 'old-li', platform: 'LinkedIn', url: resumeData.bio.linkedin }] : []),
+          ...(resumeData.bio?.github ? [{ id: 'old-gh', platform: 'GitHub', url: resumeData.bio.github }] : []),
+          ...(resumeData.bio?.website ? [{ id: 'old-web', platform: 'Portfolio', url: resumeData.bio.website }] : [])
+        ],
+        socialLinksFormat: resumeData.bio?.socialLinksFormat || 'name'
       }
     },
     summary: resumeData.summary?.content || '',
@@ -389,6 +398,7 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
         updateProjects,
         updateOptionalDetails,
         setSelectedTemplate,
+        setResumeData,
       }}
     >
       {children}
