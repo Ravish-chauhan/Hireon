@@ -1,4 +1,5 @@
 import { TemplateResumeData } from '@/types/resume';
+import { hasSummaryText, getSummaryContent } from './index';
 
 interface ResumeTemplate9Props {
   data: TemplateResumeData;
@@ -269,7 +270,7 @@ const ResumeTemplate9 = ({ data }: ResumeTemplate9Props) => {
         gap: 'var(--spacing-section, 14px)'
       }}>
         {/* Summary */}
-        {data.summary && (
+        {hasSummaryText(data.summary) && (
           <div>
             <div style={{
               fontSize: '11pt',
@@ -285,7 +286,7 @@ const ResumeTemplate9 = ({ data }: ResumeTemplate9Props) => {
               fontSize: '9pt',
               color: '#4b5563',
               lineHeight: '1.5'
-            }} dangerouslySetInnerHTML={{ __html: data.summary }} />
+            }} dangerouslySetInnerHTML={{ __html: getSummaryContent(data.summary) }} />
           </div>
         )}
 

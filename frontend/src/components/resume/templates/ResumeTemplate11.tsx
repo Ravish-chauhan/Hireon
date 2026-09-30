@@ -1,4 +1,5 @@
 import { TemplateResumeData } from '@/types/resume';
+import { hasSummaryText, getSummaryContent } from './index';
 import { Mail, Phone, MapPin, Linkedin, Github, Globe, Twitter, Link } from 'lucide-react';
 
 interface ResumeTemplate11Props {
@@ -91,9 +92,9 @@ const ResumeTemplate11 = ({ data }: ResumeTemplate11Props) => {
                 </header>
 
                 {/* Summary */}
-                {data.summary && (
+                {hasSummaryText(data.summary) && (
                     <section style={{ order: data.sectionOrder?.indexOf('summary') ?? 99, marginBottom: 'var(--spacing-section, 20px)' }} className="bg-gradient-to-r from-violet-50 to-indigo-50 p-4 rounded-xl border-l-4 border-violet-600">
-                        <div className="text-[length:calc(var(--font-size-body)*1.000)] font-[family-name:var(--font-family-body)] leading-[1.7] text-gray-700" dangerouslySetInnerHTML={{ __html: data.summary }} />
+                        <div className="text-[length:calc(var(--font-size-body)*1.000)] font-[family-name:var(--font-family-body)] leading-[1.7] text-gray-700" dangerouslySetInnerHTML={{ __html: getSummaryContent(data.summary) }} />
                     </section>
                 )}
 

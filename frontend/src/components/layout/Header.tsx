@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { Sparkles } from 'lucide-react'
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
   const location = useLocation()
+  const navigate = useNavigate()
   const headerRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -13,7 +15,7 @@ export const Header = () => {
       setIsScrolled(window.scrollY > 10)
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
-      const scrolled = (winScroll / height) * 100
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0
       setScrollProgress(scrolled)
     }
 
@@ -24,7 +26,11 @@ export const Header = () => {
   }, [])
 
   const navItems = [
-    { label: 'Home', href: '/' },
+    { label: 'Features', href: '/#features' },
+    { label: 'How it Works', href: '/#how-it-works' },
+    { label: 'AI Interview', href: '/ai-interview' },
+    { label: 'DSA Interview', href: '/dsa-interview' },
+    { label: 'Job Board', href: '/jobs' },
     { label: 'Resume Builder', href: '/resume-builder' },
     { label: 'Resume Analyzer', href: '/resume-upload' },
   ]
@@ -32,93 +38,102 @@ export const Header = () => {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-        ? 'bg-[#1A1A2E]/95 backdrop-blur-lg shadow-lg py-1'
-        : 'bg-[#1A1A2E] py-2'
-        }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent ${
+        isScrolled ? 'py-3 backdrop-blur-xs' : 'py-5'
+      }`}
     >
       <div
-        className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#FF6B5A] via-[#FFB088] to-[#FF6B5A]"
+        className="absolute bottom-0 left-0 h-[2px] bg-black/80 transition-all duration-150"
         style={{ width: `${scrollProgress}%` }}
       />
 
-      <div className="container mx-auto px-8 sm:px-16 md:px-8 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-8 max-w-7xl">
         <div className="flex justify-between items-center">
-          <div className="flex items-center w-32 sm:w-36 md:w-40 lg:w-44 overflow-hidden">
-            <Link to="/" className="flex items-center justify-center w-full h-full text-white font-bold text-xl">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2.5 group">
+            <div className="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center transition-transform group-hover:scale-105">
+              <Sparkles className="w-4 h-4 text-amber-400" />
+            </div>
+            <span className="font-bold text-xl sm:text-2xl text-neutral-900 tracking-tight font-display">
               EduNiaa
-            </Link>
-          </div>
+            </span>
+          </Link>
 
-          <nav className="hidden min-[850px]:flex items-center space-x-4">
-            {navItems.map((item) => {
-              const isActive = item.href === location.pathname ||
-                (item.href === '/' && location.pathname === '/')
-
-              return (
-                <Link
-                  key={item.label}
-                  to={item.href}
-                  className={`relative px-4 py-2 text-sm font-bold transition-all duration-300 group ${isActive
-                    ? 'text-[#FF6B5A]'
-                    : 'text-white/80 hover:text-white'
-                    }`}
-                >
-                  <span className="relative">
-                    {item.label}
-                  </span>
-                  <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-[#FF6B5A] transition-all duration-300 ${isActive ? 'w-1/2' : 'w-0 group-hover:w-1/2 opacity-50'
-                    }`} />
-                </Link>
-              )
-            })}
+          {/* Desktop Nav */}
+          <nav className="hidden min-[850px]:flex items-center space-x-6">
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="text-sm font-medium text-neutral-700 hover:text-black transition-colors"
+              >
+                {item.label}
+              </a>
+            ))}
           </nav>
 
+          {/* Right Action Buttons */}
+          <div className="hidden min-[850px]:flex items-center space-x-3">
+            <button
+              onClick={() => navigate('/resume-builder')}
+              className="px-4 py-2 text-sm font-semibold text-neutral-900 border border-neutral-400 rounded-lg hover:bg-neutral-900/5 transition duration-200 cursor-pointer bg-transparent"
+            >
+              Log in
+            </button>
+            <button
+              onClick={() => navigate('/resume-builder')}
+              className="px-4 py-2 text-sm font-semibold text-white bg-black rounded-lg hover:bg-neutral-800 transition duration-200 shadow-sm cursor-pointer"
+            >
+              Get Started
+            </button>
+          </div>
+
+          {/* Mobile Hamburger */}
           <div className="flex min-[850px]:hidden items-center">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="relative p-3 rounded-lg text-white hover:text-[#FFB088] focus:outline-none transition-all duration-300 group"
+              className="p-2 text-neutral-800 focus:outline-none"
+              aria-label="Toggle Navigation"
             >
-              <div className="relative w-6 h-6 flex flex-col justify-center items-center">
-                <span className={`absolute h-0.5 w-6 bg-current transform transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45' : '-translate-y-2'
-                  }`} />
-                <span className={`absolute h-0.5 w-6 bg-current transform transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0 scale-0' : 'opacity-100'
-                  }`} />
-                <span className={`absolute h-0.5 w-6 bg-current transform transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45' : 'translate-y-2'
-                  }`} />
+              <div className="w-6 h-6 flex flex-col justify-center items-center space-y-1.5">
+                <span className={`h-0.5 w-6 bg-black transition-all ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+                <span className={`h-0.5 w-6 bg-black transition-all ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
+                <span className={`h-0.5 w-6 bg-black transition-all ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
               </div>
             </button>
           </div>
         </div>
       </div>
 
-      <div
-        className={`overflow-hidden transition-all duration-500 ease-in-out min-[850px]:hidden ${isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-          }`}
-      >
-        <nav className="bg-white/95 backdrop-blur-xl border-t mt-2 py-4 px-4 shadow-xl">
-          <div className="flex flex-col space-y-1">
-            {navItems.map((item, index) => {
-              const isActive = item.href === location.pathname ||
-                (item.href === '/' && location.pathname === '/')
-
-              return (
-                <Link
-                  key={item.label}
-                  to={item.href}
-                  className={`px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 transform hover:translate-x-2 ${isActive
-                    ? 'text-[#FF6B5A] bg-red-50'
-                    : 'text-gray-700 hover:text-[#FF6B5A] hover:bg-gray-50'
-                    }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              )
-            })}
+      {/* Mobile Menu Dropdown */}
+      {isMobileMenuOpen && (
+        <div className="min-[850px]:hidden bg-[#FAF7F2] border-b border-neutral-200 px-6 py-5 space-y-4 shadow-lg">
+          {navItems.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block text-base font-medium text-neutral-800 hover:text-black py-1"
+            >
+              {item.label}
+            </a>
+          ))}
+          <div className="pt-2 flex flex-col gap-2.5">
+            <button
+              onClick={() => { setIsMobileMenuOpen(false); navigate('/resume-builder'); }}
+              className="w-full py-2.5 text-sm font-semibold text-neutral-800 border border-neutral-300 rounded-lg bg-white"
+            >
+              Log in
+            </button>
+            <button
+              onClick={() => { setIsMobileMenuOpen(false); navigate('/resume-builder'); }}
+              className="w-full py-2.5 text-sm font-semibold text-white bg-black rounded-lg"
+            >
+              Get Started
+            </button>
           </div>
-        </nav>
-      </div>
-    </header >
+        </div>
+      )}
+    </header>
   )
 }

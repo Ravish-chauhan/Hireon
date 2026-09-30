@@ -1,8 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Comic+Neue:wght@400;700&family=Caveat:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.font-handwriting {
+  font-family: 'Patrick Hand', 'Comic Neue', cursive, sans-serif;
+}
 
 @import 'lenis/dist/lenis.css';
 
@@ -149,6 +153,14 @@ h6 {
 }
 
 @layer utilities {
+  .font-handwriting {
+    font-family: 'Caveat', cursive, sans-serif;
+  }
+
+  .font-condensed {
+    font-family: 'Oswald', 'Impact', sans-serif;
+  }
+
   .font-display {
     font-family: var(--font-display);
   }

@@ -2,6 +2,8 @@ import React, { useState, createContext, useContext, ReactNode, useMemo, useCall
 import { TemplateResumeData } from '../types/resume'
 import { resumeService } from '../services/resumeService'
 
+import { hasSummaryText } from '../components/resume/templates'
+
 type ResumeFormData = {
   // Bio/Personal Info
   bio: {
@@ -244,7 +246,7 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
         socialLinksFormat: resumeData.bio?.socialLinksFormat || 'name'
       }
     },
-    summary: resumeData.summary?.content || '',
+    summary: hasSummaryText(resumeData.summary?.content) ? (resumeData.summary?.content || '') : '',
     experience: resumeData.experience?.map(exp => ({
       id: exp.id || `exp-${Date.now()}`,
       title: exp.jobTitle || '',

@@ -26,12 +26,13 @@ const quickLinksData = [
 ];
 
 const servicesData = [
+  { label: "AI Mock Interview", href: "/ai-interview" },
+  { label: "DSA Mock Interview", href: "/dsa-interview" },
+  { label: "Resume Builder", href: "/resume-builder" },
+  { label: "Resume Analyzer", href: "/resume-upload" },
+  { label: "Job Search", href: "/jobs" },
   { label: "Career Counseling", href: "/book-consultation" },
   { label: "University Admissions", href: "/colleges" },
-  { label: "Exam Preparation", href: "/exams" },
-  { label: "Study Abroad", href: "/college-abroad" },
-  { label: "Scholarship Guidance", href: "/book-consultation" },
-  { label: "Resume Builder", href: "/resume-builder" },
 ];
 
 const officesData = [

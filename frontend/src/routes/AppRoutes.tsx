@@ -13,6 +13,15 @@ const ResumeUpload = lazy(() => import('../pages/ResumeUpload'));
 const ResumeAnalysis = lazy(() => import('../pages/ResumeAnalysis'));
 const ResumeHistory = lazy(() => import('../pages/ResumeHistory'));
 
+const JobPlatform = lazy(() => import('../pages/JobPlatform'));
+
+const InterviewSetup = lazy(() => import('../pages/ai-interview/InterviewSetup'));
+const InterviewSession = lazy(() => import('../pages/ai-interview/InterviewSession'));
+const InterviewReport = lazy(() => import('../pages/ai-interview/InterviewReport'));
+
+const DSAInterviewSetup = lazy(() => import('../pages/dsa-interview/DSAInterviewSetup'));
+const DSAInterviewSession = lazy(() => import('../pages/dsa-interview/DSAInterviewSession'));
+
 const NotFound = lazy(() => import('../pages/NotFound'));
 
 const AppRoutes = () => {
@@ -34,6 +43,20 @@ const AppRoutes = () => {
         <Route path="/resume-upload" element={<ResumeUpload />} />
         <Route path="/resume-analysis/:id" element={<ResumeAnalysis />} />
         <Route path="/resume-history" element={<ResumeHistory />} />
+
+        {/* Job Platform Routes */}
+        <Route path="/jobs" element={<JobPlatform view="search" />} />
+        <Route path="/jobs/:jobId" element={<JobPlatform view="job" />} />
+        <Route path="/company/:companySlug" element={<JobPlatform view="company" />} />
+
+        {/* AI Interviewer Routes */}
+        <Route path="/ai-interview" element={<InterviewSetup />} />
+        <Route path="/ai-interview/:id" element={<InterviewSession />} />
+        <Route path="/ai-interview/:id/report" element={<InterviewReport />} />
+
+        {/* DSA Interviewer Routes */}
+        <Route path="/dsa-interview" element={<DSAInterviewSetup />} />
+        <Route path="/dsa-interview/:id" element={<DSAInterviewSession />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

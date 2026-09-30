@@ -1,4 +1,5 @@
 import { TemplateResumeData } from '@/types/resume';
+import { hasSummaryText, getSummaryContent } from './index';
 import { Mail, Phone, Linkedin, Github, Globe, Award, Briefcase, GraduationCap, Code, Twitter, Link } from 'lucide-react';
 
 interface ResumeTemplate13Props {
@@ -88,12 +89,12 @@ const ResumeTemplate13 = ({ data }: ResumeTemplate13Props) => {
                 {/* Main */}
                 <div className="flex-1 bg-white" style={{ padding: 'var(--margin-y, 2rem) var(--margin-x, 2.5rem)', display: 'flex', flexDirection: 'column', gap: 'var(--spacing-section, 16px)' }}>
                     {/* Summary */}
-                    {data.summary && (
+                    {hasSummaryText(data.summary) && (
                         <section style={{ order: data.sectionOrder?.indexOf('summary') ?? 99 }}>
                             <h2 className="text-[length:var(--font-size-heading)] font-[family-name:var(--font-family-heading)] [text-align:var(--align-heading)] font-bold uppercase tracking-wider text-emerald-600 flex items-center gap-2" style={{ marginBottom: 'var(--spacing-section-heading, 8px)' }}>
                                 <span className="text-emerald-400">{'//'}</span> About
                             </h2>
-                            <div className="text-[length:calc(var(--font-size-body)*0.917)] font-[family-name:var(--font-family-body)] leading-[1.7] text-gray-600" dangerouslySetInnerHTML={{ __html: data.summary }} />
+                            <div className="text-[length:calc(var(--font-size-body)*0.917)] font-[family-name:var(--font-family-body)] leading-[1.7] text-gray-600" dangerouslySetInnerHTML={{ __html: getSummaryContent(data.summary) }} />
                         </section>
                     )}
 
